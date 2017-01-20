@@ -1,0 +1,15 @@
+{
+  "name": "cyclejs-utils",
+  "version": "1.0.0",
+  "description": "A few utility functions for dealing with merging of sinks",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cyclejs",
+    "utils"
+  ],
+  "author": "Jan van Brügge <supermanitu@gmail.com>",
+  "license": "MIT"
+}
