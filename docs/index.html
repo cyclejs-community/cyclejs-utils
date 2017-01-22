@@ -64,6 +64,39 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<h1 id="cyclejs-utils">cyclejs-utils</h1>
+				<p>A few helper functions for dealing with sinks</p>
+				<h2 id="links">Links</h2>
+				<p>git repository:         <a href="https://github.com/cyclejs-community/cyclejs-util">https://github.com/cyclejs-community/cyclejs-util</a></p>
+				<p>npm package:            <a href="https://www.npmjs.com/package/cyclejs-utils">https://www.npmjs.com/package/cyclejs-utils</a></p>
+				<p>typedoc documentation:  <a href="https://cyclejs-community.github.io/cyclejs-util/index.html">https://cyclejs-community.github.io/cyclejs-util/index.html</a></p>
+				<h2 id="usage">Usage</h2>
+				<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { ChildComponent } from <span class="hljs-string">'XXX'</span>
+<span class="hljs-keyword">import</span> { Sinks, mergeSinks$, filterProp, extractSinks } from <span class="hljs-string">'cyclejs-utils'</span>
+
+<span class="hljs-keyword">const</span> drivers = { <span class="hljs-comment">/* ... */</span> };
+<span class="hljs-keyword">const</span> driverNames = <span class="hljs-built_in">Object</span>.keys(drivers);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">sources</span>)
+</span>{
+    <span class="hljs-keyword">const</span> children$ : Stream&lt;Sinks[]&gt; = sources.state
+        .map(s =&gt; s.childState.map(c =&gt; ChildComponent(sources)));
+
+    <span class="hljs-keyword">const</span> vdom$ : Stream&lt;VNode&gt; = children$
+        .map(arr =&gt; xs.combine(...arr.map(s =&gt; s.DOM)))
+        .flatten()
+        .map(arr =&gt; div([...arr])); <span class="hljs-comment">//Just display the children in a div</span>
+
+    <span class="hljs-keyword">const</span> child$ : Stream&lt;Sinks&gt; = children$.map(arr =&gt; mergeSinks(...arr));
+
+    <span class="hljs-keyword">const</span> childSink : Sinks = filterProp(
+        extractSinks(child$, driverNames)
+        <span class="hljs-string">'DOM'</span>
+    ); <span class="hljs-comment">//give me a driver object without the DOM property</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, childSink, { DOM: vdom$ });
+}
+</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
