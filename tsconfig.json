@@ -5,9 +5,10 @@
         "module": "CommonJS",
         "sourceMap": true,
         "target": "ES6",
-        "outDir": "build"
+        "outDir": "lib"
     },
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "lib"
     ]
 }
