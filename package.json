@@ -11,5 +11,8 @@
     "utils"
   ],
   "author": "Jan van Brügge <supermanitu@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^2.1.5"
+  }
 }
