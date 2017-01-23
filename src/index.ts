@@ -46,7 +46,7 @@ export function extractSinks(sinks$ : Stream<Sinks>, driverNames : string[]) : S
         .map(d => ({
         [d]: sinks$
             .map(s => s[d])
-            .map(s => !s ? xs.of() : s)
+            .filter(Boolean)
             .flatten()
         }))
         .reduce((acc, curr) => Object.assign(acc, curr), {});
