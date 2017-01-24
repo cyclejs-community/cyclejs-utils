@@ -20,7 +20,7 @@ export function mergeSinks(...sinks : Sinks[]) : Sinks
         .map(s => ({ [s]: [] }))
         .reduce((acc, curr) => Object.assign(acc, curr), {});
 
-    return sinks
+    const combinedSinks = sinks
         .reduce((acc, curr) => {
             return Object.keys(acc)
                 .map(s => ({ [s]: acc[s]}))
@@ -32,6 +32,11 @@ export function mergeSinks(...sinks : Sinks[]) : Sinks
                 })
                 .reduce((a, c) => Object.assign(a, c), {});
         }, emptySinks);
+    
+    return Object.keys(combinedSinks)
+        .map(s => [s, combinedSinks[s]])
+        .map(([s, arr]) => ({ [s]: xs.merge(...arr) }))
+        .reduce((acc, curr) => Object.assign(acc, curr), {});
 }
 
 /**
