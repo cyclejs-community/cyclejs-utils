@@ -1,8 +1,6 @@
 import xs, { Stream } from 'xstream';
 
-export type Sinks = {
-    [name : string]: Stream<any>
-};
+export type Sinks = any;
 
 /**
  * Applies xs.merge to all sinks in the array
