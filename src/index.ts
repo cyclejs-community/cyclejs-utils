@@ -12,7 +12,7 @@ export function mergeSinks(...sinks : Sinks[]) : Sinks
     const drivers : string[] = sinks
         .map(s => Object.keys(s))
         .reduce((acc, curr) => [...acc, ...curr], [])
-        .reduce((acc, curr) => acc.indexOf(curr) !== -1 ? [...acc, curr] : acc, []);
+        .reduce((acc, curr) => acc.indexOf(curr) === -1 ? [...acc, curr] : acc, []);
 
     const emptySinks : any = drivers
         .map(s => ({ [s]: [] }))
