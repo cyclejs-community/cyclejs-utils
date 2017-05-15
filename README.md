@@ -33,7 +33,7 @@ function main(sources)
     const child$ : Stream<Sinks> = children$.map(arr => mergeSinks(...arr));
 
     const childSink : Sinks = filterProp(
-        extractSinks(child$, driverNames)
+        extractSinks(child$, driverNames),
         'DOM'
     ); //give me a driver object without the DOM property
 
