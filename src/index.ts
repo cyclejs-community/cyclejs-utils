@@ -1,6 +1,8 @@
 import xs, { Stream } from 'xstream';
 
 export type Sinks = any;
+export type Sources = any;
+export type Component = (s: Sources) => Sinks;
 
 /**
  * Applies xs.merge to all sinks in the array
@@ -30,7 +32,7 @@ export function mergeSinks(...sinks : Sinks[]) : Sinks
                 })
                 .reduce((a, c) => Object.assign(a, c), {});
         }, emptySinks);
-    
+
     return Object.keys(combinedSinks)
         .map(s => [s, combinedSinks[s]])
         .map(([s, arr]) => ({ [s]: xs.merge(...arr) }))
@@ -56,25 +58,18 @@ export function extractSinks(sinks$ : Stream<Sinks>, driverNames : string[]) : S
 }
 
 /**
- * Just a wrapper around mergeSinks and extractSinks
- * @param  {Stream<Sinks>[]} ...sinks$
- * @return {Stream<Sinks>}
+ * Can be used to load a component lazy (with webpack code splitting)
+ * @param  {() => any} moduleLoader A function like `() => import('./myModule')`
+ * @param  {string[]} driverNames The names of the drivers the lazy component uses
+ * @param  {string} name The name of the export. For loading a default export simply ignore
+ * @return {Component} A dummy that loads the actual component
  */
-export function mergeSinks$(...sinks$ : Stream<Sinks>[]) : Stream<Sinks>
-{
-    return xs.combine(...sinks$).map(sinks => mergeSinks(...sinks));
-}
+export function loadAsync(moduleLoader: () => any, driverNames: string[], name: string = 'default'): Component {
+    return sources => {
+        const lazyComponent$: Stream<Sinks> = xs.fromPromise(moduleLoader())
+            .map(m => m[name])
+            .map(m => m(sources));
 
-/**
- * Returns an object without the property named
- * @param  {Sinks}  sinks A normal sinks object
- * @param  {string} name  the name of the sink to be omitted
- * @return {Sinks}
- */
-export function filterProp(sinks : Sinks, name : string) : Sinks
-{
-    return Object.keys(sinks)
-        .filter(s => s !== name)
-        .map(s => ({ [s]: sinks[s] }))
-        .reduce((acc, curr) => Object.assign(acc, curr), {});
+        return extractSinks(lazyComponent$, driverNames);
+    };
 }
