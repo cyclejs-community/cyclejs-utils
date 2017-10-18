@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -d",
     "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
-    "prepublish": "npm run build && npm run documentation"
+    "prepublishOnly": "npm run build && npm run documentation"
   },
   "keywords": [
     "cyclejs",
@@ -17,8 +17,9 @@
   "license": "MIT",
   "devDependencies": {
     "cp-cli": "^1.0.2",
-    "typedoc": "^0.5.5",
-    "typescript": "^2.1.5"
+    "typedoc": "^0.9.0",
+    "typescript": "^2.5.3",
+    "xstream": "^11.0.0"
   },
   "peerDependencies": {
     "xstream": "*"
