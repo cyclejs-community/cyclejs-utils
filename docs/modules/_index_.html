@@ -73,16 +73,17 @@
 						<section class="tsd-index-section ">
 							<h3>Type aliases</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_index_.html#component" class="tsd-kind-icon">Component</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_index_.html#sinks" class="tsd-kind-icon">Sinks</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-external-module"><a href="_index_.html#sources" class="tsd-kind-icon">Sources</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#extractsinks" class="tsd-kind-icon">extract<wbr>Sinks</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#filterprop" class="tsd-kind-icon">filter<wbr>Prop</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#loadasync" class="tsd-kind-icon">load<wbr>Async</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#mergesinks" class="tsd-kind-icon">merge<wbr>Sinks</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#mergesinks_" class="tsd-kind-icon">merge<wbr>Sinks$</a></li>
 							</ul>
 						</section>
 					</div>
@@ -91,12 +92,53 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Type aliases</h2>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="component" class="tsd-anchor"></a>
+					<h3>Component</h3>
+					<div class="tsd-signature tsd-kind-icon">Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/4f196a8/src/index.ts#L5">index.ts:5</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>s<span class="tsd-signature-symbol">: </span><a href="_index_.html#sources" class="tsd-signature-type">Sources</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>s: <a href="_index_.html#sources" class="tsd-signature-type">Sources</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
 					<a name="sinks" class="tsd-anchor"></a>
 					<h3>Sinks</h3>
 					<div class="tsd-signature tsd-kind-icon">Sinks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-util/blob/af89052/src/index.ts#L3">index.ts:3</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/4f196a8/src/index.ts#L3">index.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-external-module">
+					<a name="sources" class="tsd-anchor"></a>
+					<h3>Sources</h3>
+					<div class="tsd-signature tsd-kind-icon">Sources<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/4f196a8/src/index.ts#L4">index.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -113,7 +155,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-util/blob/af89052/src/index.ts#L46">index.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/4f196a8/src/index.ts#L48">index.ts:48</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -139,39 +181,58 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="filterprop" class="tsd-anchor"></a>
-					<h3>filter<wbr>Prop</h3>
+					<a name="loadasync" class="tsd-anchor"></a>
+					<h3>load<wbr>Async</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">filter<wbr>Prop<span class="tsd-signature-symbol">(</span>sinks<span class="tsd-signature-symbol">: </span><a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a></li>
+						<li class="tsd-signature tsd-kind-icon">load<wbr>Async<span class="tsd-signature-symbol">(</span>moduleLoader<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, driverNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_index_.html#component" class="tsd-signature-type">Component</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-util/blob/af89052/src/index.ts#L74">index.ts:74</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/4f196a8/src/index.ts#L67">index.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns an object without the property named</p>
+									<p>Can be used to load a component lazy (with webpack code splitting)</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>sinks: <a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a></h5>
+									<h5>moduleLoader: <span class="tsd-signature-type">function</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>A normal sinks object</p>
+										<p>A function like <code>() =&gt; import(&#39;./myModule&#39;)</code></p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5>driverNames: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The names of the drivers the lazy component uses</p>
 									</div>
 								</li>
 								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> name: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;default&quot;</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>the name of the sink to be omitted</p>
+										<p>The name of the export. For loading a default export simply ignore</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_index_.html#component" class="tsd-signature-type">Component</a></h4>
+							<p>A dummy that loads the actual component</p>
 						</li>
 					</ul>
 				</section>
@@ -185,7 +246,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-util/blob/af89052/src/index.ts#L10">index.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/4f196a8/src/index.ts#L12">index.ts:12</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -201,34 +262,6 @@
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a></h4>
 							<p>the new unified sink</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="mergesinks_" class="tsd-anchor"></a>
-					<h3>merge<wbr>Sinks$</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">merge<wbr>Sinks$<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>sinks$<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stream</span><span class="tsd-signature-symbol">&lt;</span><a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Stream</span><span class="tsd-signature-symbol">&lt;</span><a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-util/blob/af89052/src/index.ts#L63">index.ts:63</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Just a wrapper around mergeSinks and extractSinks</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>sinks$: <span class="tsd-signature-type">Stream</span><span class="tsd-signature-symbol">&lt;</span><a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Stream</span><span class="tsd-signature-symbol">&lt;</span><a href="_index_.html#sinks" class="tsd-signature-type">Sinks</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -248,19 +281,22 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_index_.html#component" class="tsd-kind-icon">Component</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="_index_.html#sinks" class="tsd-kind-icon">Sinks</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
+						<a href="_index_.html#sources" class="tsd-kind-icon">Sources</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_index_.html#extractsinks" class="tsd-kind-icon">extract<wbr>Sinks</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_index_.html#filterprop" class="tsd-kind-icon">filter<wbr>Prop</a>
+						<a href="_index_.html#loadasync" class="tsd-kind-icon">load<wbr>Async</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_index_.html#mergesinks" class="tsd-kind-icon">merge<wbr>Sinks</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_index_.html#mergesinks_" class="tsd-kind-icon">merge<wbr>Sinks$</a>
 					</li>
 				</ul>
 			</nav>
