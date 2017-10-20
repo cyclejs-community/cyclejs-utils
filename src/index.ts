@@ -24,7 +24,7 @@ export function mergeSinks(sinks: Sinks[], exceptions: MergeExceptions = {}): Si
 
     const emptySinks : any = drivers
         .map(s => ({ [s]: [] }) as any)
-        .reduce((acc, curr) => ({ ...acc, curr }), {});
+        .reduce((acc, curr) => Object.assign(acc, curr ), {});
 
     const combinedSinks = sinks
         .reduce((acc, curr) => {
@@ -50,7 +50,7 @@ export function mergeSinks(sinks: Sinks[], exceptions: MergeExceptions = {}): Si
         .map(([key, arr]) => ({ [key]: exceptions[key](arr) }));
 
     return merged.concat(special)
-        .reduce((acc, curr) => ({ ...acc, curr }), {});
+        .reduce((acc, curr) => Object.assign(acc, curr), {});
 }
 
 export interface PickMergeExceptions {
@@ -71,7 +71,7 @@ export function pickMergeSinks(driverNames: string[], exceptions: PickMergeExcep
             .map(key => ({ [key]: exceptions[key](instances) }));
 
         return merged.concat(special)
-            .reduce((acc, curr) => ({ ...acc, curr }), {});
+            .reduce((acc, curr) => Object.assign(acc, curr ), {});
     }
 }
 
