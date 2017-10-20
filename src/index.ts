@@ -23,7 +23,7 @@ export function mergeSinks(sinks: Sinks[], exceptions: MergeExceptions = {}): Si
         .reduce((acc, curr) => acc.indexOf(curr) === -1 ? [...acc, curr] : acc, []);
 
     const emptySinks : any = drivers
-        .map(s => ({ [s]: [] }))
+        .map(s => ({ [s]: [] }) as any)
         .reduce((acc, curr) => ({ ...acc, curr }), {});
 
     const combinedSinks = sinks
