@@ -61,16 +61,18 @@ export interface PickMergeExceptions {
  * Just like mergeSinks, but for onionify collections
  * @see mergeSinks
  */
-export function pickMergeSinks(instances: Instances<any>, driverNames: string[], exceptions: PickMergeExceptions = {}): Sinks {
-    const merged: Sinks = driverNames
-        .filter(name => Object.keys(exceptions).indexOf(name) === -1)
-        .map(name => instances.pickMerge(name));
+export function pickMergeSinks(driverNames: string[], exceptions: PickMergeExceptions = {}): (ins: Instances<any>) => Sinks {
+    return instances => {
+        const merged: Sinks = driverNames
+            .filter(name => Object.keys(exceptions).indexOf(name) === -1)
+            .map(name => instances.pickMerge(name));
 
-    const special = Object.keys(exceptions)
-        .map(key => ({ [key]: exceptions[key](instances) }));
+        const special = Object.keys(exceptions)
+            .map(key => ({ [key]: exceptions[key](instances) }));
 
-    return merged.concat(special)
-        .reduce((acc, curr) => ({ ...acc, curr }), {});
+        return merged.concat(special)
+            .reduce((acc, curr) => ({ ...acc, curr }), {});
+    }
 }
 
 /**
