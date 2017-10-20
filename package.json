@@ -17,6 +17,8 @@
   "license": "MIT",
   "devDependencies": {
     "cp-cli": "^1.0.2",
+    "cycle-onionify": "^4.0.0",
+    "release-it": "^3.1.2",
     "typedoc": "^0.9.0",
     "typescript": "^2.5.3",
     "xstream": "^11.0.0"

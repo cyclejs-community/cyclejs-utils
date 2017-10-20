@@ -1,24 +1,30 @@
 import xs, { Stream } from 'xstream';
+import { Instances } from 'cycle-onionify';
 
 export type Sinks = any;
 export type Sources = any;
 export type Component = (s: Sources) => Sinks;
 
+export interface MergeExceptions {
+    [key: string]: (s: Stream<any>[]) => Stream<any>;
+}
+
 /**
  * Applies xs.merge to all sinks in the array
- * @param  {Sinks[]} ...sinks the sinks to be merged
+ * @param  {Sinks[]} sinks    the sinks to be merged
+ * @param  {MergeExceptions}  exceptions a dictionary of special channels, e.g. DOM
  * @return {Sinks}            the new unified sink
  */
-export function mergeSinks(...sinks : Sinks[]) : Sinks
+export function mergeSinks(sinks: Sinks[], exceptions: MergeExceptions = {}): Sinks
 {
     const drivers : string[] = sinks
-        .map(s => Object.keys(s))
-        .reduce((acc, curr) => [...acc, ...curr], [])
+        .map(Object.keys)
+        .reduce((acc, curr) => acc.concat(curr), [])
         .reduce((acc, curr) => acc.indexOf(curr) === -1 ? [...acc, curr] : acc, []);
 
     const emptySinks : any = drivers
         .map(s => ({ [s]: [] }))
-        .reduce((acc, curr) => Object.assign(acc, curr), {});
+        .reduce((acc, curr) => ({ ...acc, curr }), {});
 
     const combinedSinks = sinks
         .reduce((acc, curr) => {
@@ -33,10 +39,38 @@ export function mergeSinks(...sinks : Sinks[]) : Sinks
                 .reduce((a, c) => Object.assign(a, c), {});
         }, emptySinks);
 
-    return Object.keys(combinedSinks)
+    const merged = Object.keys(combinedSinks)
+        .filter(name => Object.keys(exceptions).indexOf(name) === -1)
         .map(s => [s, combinedSinks[s]])
-        .map(([s, arr]) => ({ [s]: xs.merge(...arr) }))
-        .reduce((acc, curr) => Object.assign(acc, curr), {});
+        .map(([s, arr]) => ({ [s]: xs.merge(...arr) }));
+
+    const special = Object.keys(exceptions)
+        .map(key => [key, combinedSinks[key]])
+        .filter(([_, arr]) => arr !== undefined)
+        .map(([key, arr]) => ({ [key]: exceptions[key](arr) }));
+
+    return merged.concat(special)
+        .reduce((acc, curr) => ({ ...acc, curr }), {});
+}
+
+export interface PickMergeExceptions {
+    [key: string]: (ins: Instances<any>) => Stream<any>;
+}
+
+/**
+ * Just like mergeSinks, but for onionify collections
+ * @see mergeSinks
+ */
+export function pickMergeSinks(instances: Instances<any>, driverNames: string[], exceptions: PickMergeExceptions = {}): Sinks {
+    const merged: Sinks = driverNames
+        .filter(name => Object.keys(exceptions).indexOf(name) === -1)
+        .map(name => instances.pickMerge(name));
+
+    const special = Object.keys(exceptions)
+        .map(key => ({ [key]: exceptions[key](instances) }));
+
+    return merged.concat(special)
+        .reduce((acc, curr) => ({ ...acc, curr }), {});
 }
 
 /**
