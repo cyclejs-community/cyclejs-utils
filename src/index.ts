@@ -65,7 +65,7 @@ export function pickMergeSinks(driverNames: string[], exceptions: PickMergeExcep
     return instances => {
         const merged: Sinks = driverNames
             .filter(name => Object.keys(exceptions).indexOf(name) === -1)
-            .map(name => instances.pickMerge(name));
+            .map(name => ({ [name]: instances.pickMerge(name) }));
 
         const special = Object.keys(exceptions)
             .map(key => ({ [key]: exceptions[key](instances) }));
