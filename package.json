@@ -2,10 +2,11 @@
   "name": "cyclejs-utils",
   "version": "3.0.2",
   "description": "A few utility functions for dealing with merging of sinks",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/es6/index.js",
+  "typings": "lib/es6/index.d.ts",
   "scripts": {
-    "build": "tsc -d",
+    "build": "tsc -d && tsc -d --module ES6 --outDir lib/es6",
     "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
     "prepublishOnly": "npm run build && npm run documentation"
   },

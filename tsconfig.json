@@ -2,10 +2,12 @@
     "compileOnSave": false,
     "compilerOptions":
     {
-        "module": "CommonJS",
+        "module": "commonjs",
+        "moduleResolution": "node",
         "sourceMap": true,
-        "target": "ES6",
-        "outDir": "lib"
+        "target": "ES5",
+        "lib": ["DOM", "ES6", "ES5"],
+        "outDir": "lib/cjs"
     },
     "exclude": [
         "node_modules",
