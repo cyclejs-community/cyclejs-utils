@@ -88,6 +88,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter"><a href="_index_.html#composelenses" class="tsd-kind-icon">compose<wbr>Lenses</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#extractsinks" class="tsd-kind-icon">extract<wbr>Sinks</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#loadasync" class="tsd-kind-icon">load<wbr>Async</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_index_.html#mergesinks" class="tsd-kind-icon">merge<wbr>Sinks</a></li>
@@ -105,7 +106,7 @@
 					<div class="tsd-signature tsd-kind-icon">Component<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/e454663/src/index.ts#L6">index.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/551efb1/src/index.ts#L6">index.ts:6</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -136,7 +137,7 @@
 					<div class="tsd-signature tsd-kind-icon">Sinks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/e454663/src/index.ts#L4">index.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/551efb1/src/index.ts#L4">index.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -146,13 +147,57 @@
 					<div class="tsd-signature tsd-kind-icon">Sources<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/e454663/src/index.ts#L5">index.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/551efb1/src/index.ts#L5">index.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+					<a name="composelenses" class="tsd-anchor"></a>
+					<h3>compose<wbr>Lenses</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">compose<wbr>Lenses&lt;A, B, C&gt;<span class="tsd-signature-symbol">(</span>outer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Lens</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span>, inner<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Lens</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Lens</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/551efb1/src/index.ts#L138">index.ts:138</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Composes two lenses to one</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A</h4>
+								</li>
+								<li>
+									<h4>B</h4>
+								</li>
+								<li>
+									<h4>C</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>outer: <span class="tsd-signature-type">Lens</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>inner: <span class="tsd-signature-type">Lens</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Lens</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>composed lens</p>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
 					<a name="extractsinks" class="tsd-anchor"></a>
 					<h3>extract<wbr>Sinks</h3>
@@ -163,7 +208,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/e454663/src/index.ts#L84">index.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/551efb1/src/index.ts#L96">index.ts:96</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -198,7 +243,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/e454663/src/index.ts#L103">index.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/551efb1/src/index.ts#L117">index.ts:117</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -254,7 +299,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/e454663/src/index.ts#L18">index.ts:18</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/551efb1/src/index.ts#L18">index.ts:18</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -292,7 +337,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/e454663/src/index.ts#L64">index.ts:64</a></li>
+									<li>Defined in <a href="https://github.com/cyclejs-community/cyclejs-utils/blob/551efb1/src/index.ts#L71">index.ts:71</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -365,6 +410,9 @@
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="_index_.html#sources" class="tsd-kind-icon">Sources</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_index_.html#composelenses" class="tsd-kind-icon">compose<wbr>Lenses</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_index_.html#extractsinks" class="tsd-kind-icon">extract<wbr>Sinks</a>
