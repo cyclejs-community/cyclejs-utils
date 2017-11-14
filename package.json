@@ -7,8 +7,9 @@
   "typings": "lib/es6/index.d.ts",
   "scripts": {
     "build": "tsc -d && tsc -d --module ES6 --outDir lib/es6",
-    "documentation": "typedoc --out docs src && cp-cli .nojekyll docs/.nojekyll",
-    "prepublishOnly": "npm run build && npm run documentation"
+    "format": "prettier --tab-width 4 --single-quote --write './src/**/*.{js,ts,tsx}'",
+    "documentation": "typedoc --out docs src && touch docs/.nojekyll",
+    "prepublishOnly": "npm run format && npm run build && npm run documentation"
   },
   "keywords": [
     "cyclejs",
@@ -18,6 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "cp-cli": "^1.0.2",
+    "prettier": "^1.8.2",
     "release-it": "^3.1.2",
     "typedoc": "^0.9.0",
     "typescript": "^2.5.3",
