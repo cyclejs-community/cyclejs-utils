@@ -48,7 +48,7 @@ export function mergeSinks(
     const merged = Object.keys(combinedSinks)
         .filter(name => Object.keys(exceptions).indexOf(name) === -1)
         .map(s => [s, combinedSinks[s]])
-        .map(([s, arr]) => ({ [s]: xs.merge(...arr) }));
+        .map(([s, arr]) => ({ [s]: arr.length === 1 ? arr[0] : xs.merge(...arr) }));
 
     const special = Object.keys(exceptions)
         .map(key => [key, combinedSinks[key]])
