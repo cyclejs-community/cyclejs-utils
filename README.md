@@ -8,7 +8,7 @@ git repository:         https://github.com/cyclejs-community/cyclejs-util
 
 npm package:            https://www.npmjs.com/package/cyclejs-utils
 
-typedoc documentation:  https://cyclejs-community.github.io/cyclejs-util/index.html
+typedoc documentation:  https://cyclejs-community.github.io/cyclejs-utils/
 
 ## Usage
 
