@@ -16,7 +16,7 @@ The most useful functions are `mergeSinks` and `extractSinks`.
 
 ```ts
 import { ChildComponent } from 'XXX'
-import { Sinks, mergeSinks$, filterProp, extractSinks } from 'cyclejs-utils'
+import { Sinks, mergeSinks, filterProp, extractSinks } from 'cyclejs-utils'
 
 const drivers = { /* ... */ };
 const driverNames = Object.keys(drivers);
