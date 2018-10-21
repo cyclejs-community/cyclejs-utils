@@ -1,13 +1,26 @@
 import xs, { Stream } from 'xstream';
-import { Instances, Lens } from 'cycle-onionify';
+import { Instances, Lens } from '@cycle/state';
 
-export type Sinks = any;
-export type Sources = any;
-export type Component = (s: Sources) => Sinks;
+type MergeArguments<T, K extends string = "whatever"> =
+    {
+        [Key in K]: T extends (first: infer A) => void ? A :
+        MergeOnePlus<T, K>
+    }[K];
 
-export interface MergeExceptions {
-    [key: string]: (s: Stream<any>[]) => Stream<any>;
-}
+type MergeOnePlus<T, K extends string> =
+    {
+        [Key in K]: T extends (first: infer A, ...args: infer U) => void
+        ? A & MergeArguments<(...args: U) => void, K>
+        : never
+    }[K];
+
+type IntoSignature<T extends unknown[]> = (...args: T) => void;
+
+type MergeTupleMembers<T extends unknown[]> = MergeArguments<IntoSignature<T>>;
+
+export type MergeExceptions<Si> = {
+    [k in keyof Si]?: (s: Si[k][]) => Si[k];
+};
 
 /**
  * Applies xs.merge to all sinks in the array
@@ -15,10 +28,10 @@ export interface MergeExceptions {
  * @param  {MergeExceptions}  exceptions a dictionary of special channels, e.g. DOM
  * @return {Sinks}            the new unified sink
  */
-export function mergeSinks(
-    sinks: Sinks[],
-    exceptions: MergeExceptions = {}
-): Sinks {
+export function mergeSinks<T extends [any, ...any[]]>(
+    sinks: T,
+    exceptions: MergeExceptions<MergeTupleMembers<T>> = {}
+): MergeTupleMembers<T> {
     const drivers: string[] = sinks
         .map(Object.keys)
         .reduce((acc, curr) => acc.concat(curr), [])
@@ -39,13 +52,13 @@ export function mergeSinks(
                 return !curr[name]
                     ? o
                     : {
-                          [name]: [...o[name], curr[name]]
-                      };
+                        [name]: [...o[name], curr[name]]
+                    };
             })
             .reduce((a, c) => Object.assign(a, c), {});
     }, emptySinks);
 
-    const merged = Object.keys(combinedSinks)
+    const merged: any = Object.keys(combinedSinks)
         .filter(name => Object.keys(exceptions).indexOf(name) === -1)
         .map(s => [s, combinedSinks[s]])
         .map(([s, arr]) => ({
@@ -62,9 +75,9 @@ export function mergeSinks(
         .reduce((acc, curr) => Object.assign(acc, curr), {});
 }
 
-export interface PickMergeExceptions {
-    [key: string]: (ins: Instances<any>) => Stream<any>;
-}
+export type PickMergeExceptions = {
+    [k: string]: (ins: Instances<any>) => Stream<any>;
+};
 
 /**
  * Just like mergeSinks, but for onionify collections
@@ -73,9 +86,9 @@ export interface PickMergeExceptions {
 export function pickMergeSinks(
     driverNames: string[],
     exceptions: PickMergeExceptions = {}
-): (ins: Instances<any>) => Sinks {
+): (ins: Instances<any>) => any {
     return instances => {
-        const merged: Sinks = driverNames
+        const merged: any = driverNames
             .filter(name => Object.keys(exceptions).indexOf(name) === -1)
             .map(name => ({ [name]: instances.pickMerge(name) }));
 
@@ -95,18 +108,18 @@ export function pickMergeSinks(
  * @param  {string[]}      driverNames the names of all drivers that are possibly in the stream, it's best to use Object.keys() on your driver object
  * @return {Sinks}                     A sinks containing the streams of the last emission in the sinks$
  */
-export function extractSinks(
-    sinks$: Stream<Sinks>,
+export function extractSinks<Si>(
+    sinks$: Stream<Si>,
     driverNames: string[]
-): Sinks {
+): { [k in keyof Si]: Stream<Si[k]> } {
     return driverNames
         .map(d => ({
             [d]: sinks$
-                .map<Stream<any> | undefined>(s => s[d])
+                .map<any>(s => s[d])
                 .filter(b => !!b)
                 .flatten()
         }))
-        .reduce((acc, curr) => Object.assign(acc, curr), {});
+        .reduce((acc, curr) => Object.assign(acc, curr), {}) as any;
 }
 
 /**
@@ -117,12 +130,12 @@ export function extractSinks(
  * @return {Component} A dummy that loads the actual component
  */
 export function loadAsync(
-    moduleLoader: () => any,
+    moduleLoader: () => Promise<any>,
     driverNames: string[],
     name: string = 'default'
-): Component {
+): (s: any) => any {
     return sources => {
-        const lazyComponent$: Stream<Sinks> = xs
+        const lazyComponent$: Stream<any> = xs
             .fromPromise(moduleLoader())
             .map(m => m[name])
             .map(m => m(sources));
