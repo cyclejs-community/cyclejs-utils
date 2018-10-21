@@ -16,30 +16,21 @@ The most useful functions are `mergeSinks` and `extractSinks`.
 
 ```ts
 import { ChildComponent } from 'XXX'
-import { Sinks, mergeSinks, filterProp, extractSinks } from 'cyclejs-utils'
+import { mergeSinks, extractSinks } from 'cyclejs-utils'
 
 const drivers = { /* ... */ };
 const driverNames = Object.keys(drivers);
 
 function main(sources)
 {
-    const children$ : Stream<Sinks[]> = sources.state
+    const children$: Stream<Sinks[]> = sources.state
         .map(s => s.childState.map(c => ChildComponent(sources)));
 
-    //Create a combined DOM of the children
-    const vdom$ : Stream<VNode> = children$
-        .map(arr => xs.combine(...arr.map(s => s.DOM)))
-        .flatten()
-        .map(div); //Just display the children in a div
+    // Merge all children Sinks automaticly, but combine DOM and display in div
+    const child$: Stream<Sinks> = children$.map(arr => mergeSinks(arr, {
+        DOM: arr => xs.combine(...arr).map(div)
+    }));
 
-    //Merge all children Sinks automaticly
-    const child$ : Stream<Sinks> = children$.map(arr => mergeSinks(...arr));
-
-    const childSink : Sinks = filterProp(
-        extractSinks(child$, driverNames), //Transform a Stream of Sinks to a normal Sinks object
-        'DOM'
-    ); //give me a driver object without the DOM property
-
-    return Object.assign({}, childSink, { DOM: vdom$ });
+    return extractSinks(child$, driverNames),
 }
 ```
