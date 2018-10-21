@@ -9,8 +9,7 @@
         "lib": ["DOM", "ES6", "ES5"],
         "outDir": "lib/cjs"
     },
-    "exclude": [
-        "node_modules",
-        "lib"
+    "files": [
+        "src/index.ts"
     ]
 }

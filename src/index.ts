@@ -1,26 +1,21 @@
 import xs, { Stream } from 'xstream';
 import { Instances, Lens } from '@cycle/state';
 
-type MergeArguments<T, K extends string = "whatever"> =
-    {
-        [Key in K]: T extends (first: infer A) => void ? A :
-        MergeOnePlus<T, K>
-    }[K];
+type MergeArguments<T, K extends string = 'whatever'> = {
+    [Key in K]: T extends (first: infer A) => void ? A : MergeOnePlus<T, K>
+}[K];
 
-type MergeOnePlus<T, K extends string> =
-    {
-        [Key in K]: T extends (first: infer A, ...args: infer U) => void
+type MergeOnePlus<T, K extends string> = {
+    [Key in K]: T extends (first: infer A, ...args: infer U) => void
         ? A & MergeArguments<(...args: U) => void, K>
         : never
-    }[K];
+}[K];
 
 type IntoSignature<T extends unknown[]> = (...args: T) => void;
 
 type MergeTupleMembers<T extends unknown[]> = MergeArguments<IntoSignature<T>>;
 
-export type MergeExceptions<Si> = {
-    [k in keyof Si]?: (s: Si[k][]) => Si[k];
-};
+export type MergeExceptions<Si> = { [k in keyof Si]?: (s: Si[k][]) => Si[k] };
 
 /**
  * Applies xs.merge to all sinks in the array
@@ -52,8 +47,8 @@ export function mergeSinks<T extends [any, ...any[]]>(
                 return !curr[name]
                     ? o
                     : {
-                        [name]: [...o[name], curr[name]]
-                    };
+                          [name]: [...o[name], curr[name]]
+                      };
             })
             .reduce((a, c) => Object.assign(a, c), {});
     }, emptySinks);
