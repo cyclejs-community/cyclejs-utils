@@ -73,31 +73,22 @@
 				<h2 id="usage">Usage</h2>
 				<p>The most useful functions are <code>mergeSinks</code> and <code>extractSinks</code>.</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { ChildComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'XXX'</span>
-<span class="hljs-keyword">import</span> { Sinks, mergeSinks, filterProp, extractSinks } <span class="hljs-keyword">from</span> <span class="hljs-string">'cyclejs-utils'</span>
+<span class="hljs-keyword">import</span> { mergeSinks, extractSinks } <span class="hljs-keyword">from</span> <span class="hljs-string">'cyclejs-utils'</span>
 
 <span class="hljs-keyword">const</span> drivers = { <span class="hljs-comment">/* ... */</span> };
 <span class="hljs-keyword">const</span> driverNames = <span class="hljs-built_in">Object</span>.keys(drivers);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span>(<span class="hljs-params">sources</span>)
 </span>{
-    <span class="hljs-keyword">const</span> children$ : Stream&lt;Sinks[]&gt; = sources.state
+    <span class="hljs-keyword">const</span> children$: Stream&lt;Sinks[]&gt; = sources.state
         .map(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.childState.map(<span class="hljs-function"><span class="hljs-params">c</span> =&gt;</span> ChildComponent(sources)));
 
-    <span class="hljs-comment">//Create a combined DOM of the children</span>
-    <span class="hljs-keyword">const</span> vdom$ : Stream&lt;VNode&gt; = children$
-        .map(<span class="hljs-function"><span class="hljs-params">arr</span> =&gt;</span> xs.combine(...arr.map(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s.DOM)))
-        .flatten()
-        .map(div); <span class="hljs-comment">//Just display the children in a div</span>
+    <span class="hljs-comment">// Merge all children Sinks automaticly, but combine DOM and display in div</span>
+    <span class="hljs-keyword">const</span> child$: Stream&lt;Sinks&gt; = children$.map(<span class="hljs-function"><span class="hljs-params">arr</span> =&gt;</span> mergeSinks(arr, {
+        DOM: <span class="hljs-function"><span class="hljs-params">arr</span> =&gt;</span> xs.combine(...arr).map(div)
+    }));
 
-    <span class="hljs-comment">//Merge all children Sinks automaticly</span>
-    <span class="hljs-keyword">const</span> child$ : Stream&lt;Sinks&gt; = children$.map(<span class="hljs-function"><span class="hljs-params">arr</span> =&gt;</span> mergeSinks(...arr));
-
-    <span class="hljs-keyword">const</span> childSink : Sinks = filterProp(
-        extractSinks(child$, driverNames), <span class="hljs-comment">//Transform a Stream of Sinks to a normal Sinks object</span>
-        <span class="hljs-string">'DOM'</span>
-    ); <span class="hljs-comment">//give me a driver object without the DOM property</span>
-
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, childSink, { DOM: vdom$ });
+    <span class="hljs-keyword">return</span> extractSinks(child$, driverNames),
 }</code></pre>
 			</div>
 		</div>
