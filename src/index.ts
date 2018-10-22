@@ -106,7 +106,7 @@ export function pickMergeSinks(
 export function extractSinks<Si>(
     sinks$: Stream<Si>,
     driverNames: string[]
-): { [k in keyof Si]: Si[k] } {
+): { [k in keyof Si]-?: Si[k] } {
     return driverNames
         .map(d => ({
             [d]: sinks$
