@@ -56,3 +56,5 @@ extract.DOM.subscribe({});
 extract.HTTP.subscribe({});
 // typings:expect-error
 extract.foo.subscribe({});
+// typings:expect-error
+extract.DOM.flatten().subscribe({});
